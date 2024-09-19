@@ -13,7 +13,9 @@
 const functions = require("firebase-functions");
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")(process.env.REACT_APP_SECRET_CLIENT);
+const stripe = require("stripe")(
+  "sk_test_51PzIuZ09yx4NfttgAbLTRXFLWKVan5RE4Mb0lFld79UHX9JcMVwxOUJJPrIjW3FLbnR2Ypk52ZqQ4s6ykL7fyoWD00MwvwanRU"
+);
 
 // API setup down below
 
