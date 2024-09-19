@@ -20,7 +20,6 @@ function App() {
   const [{}, dispatch] = useStateValue();
   useEffect(() => {
     onAuthStateChanged(auth, (authuser) => {
-      console.log("the user is>>>>", authuser);
       if (authuser) {
         dispatch({
           type: "SET_USER",
