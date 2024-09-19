@@ -8,7 +8,14 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./firebase"; // Adjust the path to your Firebase configuration
 import { useStateValue } from "./components/StateProvider/StateProvider";
+import Payment from "./components/Payment/Payment";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import Orders from "./components/Orders/Orders";
 
+const promise = loadStripe(
+  "pk_test_51PzIuZ09yx4Nfttgm4MOfDmmD2E7Fgzbp26lMEl2S3sYkfR8Lt4nOLZsd728wdh03cHbQWJkYu1drWFsk5lvCyCr007Er3qaY6"
+);
 function App() {
   const [{}, dispatch] = useStateValue();
   useEffect(() => {
@@ -32,7 +39,17 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/login" element={[<Login />]} />
+          <Route path="/orders" element={[<Header />, <Orders />]} />
           <Route path="/checkout" element={[<Header />, <Checkout />]} />
+          <Route
+            path="/payment"
+            element={[
+              <Header />,
+              <Elements stripe={promise}>
+                <Payment />
+              </Elements>,
+            ]}
+          />
           <Route path="/" element={[<Header />, <Home />]} />
           {/* Default route should always be at the bottom or else it's going to be a problem:) */}
         </Routes>
